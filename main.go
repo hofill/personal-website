@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"hofill/routes"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -17,7 +18,7 @@ func startAPI() {
 		c.String(http.StatusOK, "server running")
 	})
 
-	err := router.Run("localhost:8080")
+	err := router.Run("localhost:" + os.Getenv("PORT"))
 	if err != nil {
 		return 
 	}
