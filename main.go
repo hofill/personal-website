@@ -13,7 +13,7 @@ func startAPI() {
 	router := gin.Default()
 	router.GET("/events", routes.GetEvents)
 
-	err := router.Run("localhost:443")
+	err := router.Run("localhost:8080")
 	if err != nil {
 		return 
 	}
