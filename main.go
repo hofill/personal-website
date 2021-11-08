@@ -18,7 +18,7 @@ func startAPI() {
 		c.String(http.StatusOK, "server running")
 	})
 
-	err := router.Run("localhost:" + os.Getenv("PORT"))
+	err := router.Run(":" + os.Getenv("PORT"))
 	if err != nil {
 		return 
 	}
