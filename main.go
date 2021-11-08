@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"hofill/routes"
-	"net/http"
+	"log"
 	"os"
 )
 
@@ -13,13 +13,13 @@ func main() {
 
 func startAPI() {
 	router := gin.Default()
-	router.GET("/events", routes.GetEvents)
-	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "server running")
-	})
+
+	routes.SetupEventRoutes(router)
+	routes.SetupWriteUpRoutes(router)
+	routes.SetupDefaultRoutes(router)
 
 	err := router.Run(":" + os.Getenv("PORT"))
 	if err != nil {
-		return 
+		log.Fatal(err)
 	}
 }
