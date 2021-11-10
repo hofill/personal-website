@@ -2,6 +2,8 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/mitchellh/mapstructure"
+	_ "github.com/mitchellh/mapstructure"
 	"hofill/models"
 	"hofill/utils"
 	"io/ioutil"
@@ -35,25 +37,36 @@ func getEventFolders() []models.Event {
 		eventMetaDataPath := eventFolderPath +
 			"/" + f.Name() + "/" +
 			metaDataFileName
-		var event = models.Event{
-			Title:  f.Name(),
-			Date:   utils.GetDateFormatted(f.ModTime()),
-			Meta:   getMetaData(eventMetaDataPath),
-			Status: "OK",
+		event, err := getEventData(eventMetaDataPath)
+		if err != nil {
+			log.Println(err)
+			continue
 		}
+
+		if event.Title == "" {
+			event.Title = f.Name()
+		}
+
+		event.Status = "OK"
 		events = append(events, event)
 	}
 
 	return events
 }
 
-func getMetaData(fileName string) string {
+func getEventData(fileName string) (models.Event, error) {
+	event := models.Event{}
+
 	metaDataValues, err := utils.GetEventMetaData(fileName)
 	if err != nil {
-		return ""
+		return models.Event{}, err
 	}
-	if value, ok := metaDataValues["meta"]; ok {
-		return value
+
+	err = mapstructure.Decode(metaDataValues, &event)
+	if err != nil {
+		return event, err
 	}
-	return ""
+
+	return event, nil
+
 }

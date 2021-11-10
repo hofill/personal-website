@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func getLinesFromFilePath(filePath string) ([]string, error) {
+func getLinesFromFile(filePath string) ([]string, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, err
@@ -26,7 +26,7 @@ func getLinesFromFilePath(filePath string) ([]string, error) {
 
 func GetWriteUpMetaData(filePath string) (map[string]string, error) {
 	result := make(map[string]string)
-	lines, err := getLinesFromFilePath(filePath)
+	lines, err := getLinesFromFile(filePath)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func GetWriteUpMetaData(filePath string) (map[string]string, error) {
 
 func GetEventMetaData(filePath string) (map[string]string, error) {
 	result := make(map[string]string)
-	lines, err := getLinesFromFilePath(filePath)
+	lines, err := getLinesFromFile(filePath)
 	if err != nil {
 		return nil, err
 	}

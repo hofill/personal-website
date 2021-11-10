@@ -14,4 +14,5 @@ type WriteUpPreview struct {
 	Points     string `json:"points"`
 	Solved     bool   `json:"solved"`
 	Flag       string `json:"flag"`
+	Status     string `json:"status"`
 }
