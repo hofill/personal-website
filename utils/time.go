@@ -1,12 +1,18 @@
 package utils
 
-import "time"
+import (
+	"log"
+	"time"
+)
 
 const (
 	layoutUS = "January 2, 2006"
 )
 
 func TimeToLayoutUS(timeString string) time.Time {
-	t, _ := time.Parse(layoutUS, timeString)
+	t, err := time.Parse(layoutUS, timeString)
+	if err != nil {
+		log.Println(err)
+	}
 	return t
 }

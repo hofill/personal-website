@@ -13,11 +13,11 @@ type InMemoryRepository struct {
 	writeUps []models.WriteUp
 }
 
-func (i *InMemoryRepository) addEvent(event models.Event) {
+func (i *InMemoryRepository) AddEvent(event models.Event) {
 	i.events = append(i.events, event)
 }
 
-func (i *InMemoryRepository) removeEvent(event models.Event) error {
+func (i *InMemoryRepository) RemoveEvent(event models.Event) error {
 	for index, e := range i.events {
 		if e == event {
 			i.events = append(i.events[:index], i.events[index+1:]...)
@@ -27,11 +27,11 @@ func (i *InMemoryRepository) removeEvent(event models.Event) error {
 	return errors.New("event not found")
 }
 
-func (i *InMemoryRepository) addWriteUp(writeUp models.WriteUp) {
+func (i *InMemoryRepository) AddWriteUp(writeUp models.WriteUp) {
 	i.writeUps = append(i.writeUps, writeUp)
 }
 
-func (i *InMemoryRepository) removeWriteUp(writeUp models.WriteUp) error {
+func (i *InMemoryRepository) RemoveWriteUp(writeUp models.WriteUp) error {
 	for index, w := range i.writeUps {
 		if w == writeUp {
 			i.writeUps = append(i.writeUps[:index], i.writeUps[index+1:]...)
@@ -41,25 +41,25 @@ func (i *InMemoryRepository) removeWriteUp(writeUp models.WriteUp) error {
 	return errors.New("writeup not found")
 }
 
-func (i *InMemoryRepository) getEvents() []models.Event {
+func (i *InMemoryRepository) GetEvents() []models.Event {
 	return i.events
 }
 
-func (i *InMemoryRepository) orderEventsByDate() []models.Event {
+func (i *InMemoryRepository) OrderEventsByDate() []models.Event {
 	var events = i.events
 	sort.Slice(events, func(i, j int) bool {
 		timeFirst := utils.TimeToLayoutUS(events[i].Date)
 		timeSecond := utils.TimeToLayoutUS(events[j].Date)
-		return timeFirst.Before(timeSecond)
+		return timeFirst.After(timeSecond)
 	})
 	return events
 }
 
-func (i *InMemoryRepository) getWriteUps() []models.WriteUp {
+func (i *InMemoryRepository) GetWriteUps() []models.WriteUp {
 	return i.writeUps
 }
 
-func (i *InMemoryRepository) getWriteUpPreviews() []models.WriteUpPreview {
+func (i *InMemoryRepository) GetWriteUpPreviews() []models.WriteUpPreview {
 	var writeUpPreviews []models.WriteUpPreview
 
 	for _, writeUp := range i.writeUps {
@@ -74,7 +74,7 @@ func (i *InMemoryRepository) getWriteUpPreviews() []models.WriteUpPreview {
 	return writeUpPreviews
 }
 
-func (i *InMemoryRepository) getWriteUpsForEvent(eventName string) []models.WriteUp {
+func (i *InMemoryRepository) GetWriteUpsForEvent(eventName string) []models.WriteUp {
 	var writeUpsForEvent []models.WriteUp
 	for _, writeUp := range i.writeUps {
 		if writeUp.Event == eventName {
@@ -84,9 +84,9 @@ func (i *InMemoryRepository) getWriteUpsForEvent(eventName string) []models.Writ
 	return writeUpsForEvent
 }
 
-func (i *InMemoryRepository) getWriteUpPreviewsForEvent(eventName string) []models.WriteUpPreview {
+func (i *InMemoryRepository) GetWriteUpPreviewsForEvent(eventName string) []models.WriteUpPreview {
 	var writeUpPreviewsForEvent []models.WriteUpPreview
-	for _, writeUp := range i.getWriteUpPreviews() {
+	for _, writeUp := range i.GetWriteUpPreviews() {
 		if writeUp.Event == eventName {
 			writeUpPreviewsForEvent = append(writeUpPreviewsForEvent, writeUp)
 		}

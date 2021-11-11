@@ -3,23 +3,23 @@ package repository
 import "hofill/models"
 
 type WriteUpRepository interface {
-	addEvent(event models.Event)
+	AddEvent(event models.Event)
 
-	removeEvent(event models.Event) error
+	RemoveEvent(event models.Event) error
 
-	addWriteUp(writeUp models.WriteUp)
+	AddWriteUp(writeUp models.WriteUp)
 
-	removeWriteUp(writeUp models.WriteUp) error
+	RemoveWriteUp(writeUp models.WriteUp) error
 
-	getEvents() []models.Event
+	GetEvents() []models.Event
 
-	orderEventsByDate() []models.Event
+	OrderEventsByDate() []models.Event
 
-	getWriteUps() []models.WriteUp
+	GetWriteUps() []models.WriteUp
 
-	getWriteUpPreviews() []models.WriteUpPreview
+	GetWriteUpPreviews() []models.WriteUpPreview
 
-	getWriteUpsForEvent(eventName string) []models.WriteUp
+	GetWriteUpsForEvent(eventName string) []models.WriteUp
 
-	getWriteUpPreviewsForEvent(eventName string) []models.WriteUpPreview
+	GetWriteUpPreviewsForEvent(eventName string) []models.WriteUpPreview
 }

@@ -1,8 +1,8 @@
 package models
 
 type WriteUp struct {
-	MDData string `json:"mdData" mapstructure:"md_data"`
-	WriteUpPreview
+	MDData         string `json:"mdData" mapstructure:"md_data"`
+	WriteUpPreview `mapstructure:",squash"`
 }
 
 type WriteUpPreview struct {

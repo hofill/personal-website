@@ -1,10 +1,12 @@
 package main
 
 import (
+	"hofill/repository"
 	"hofill/services"
 )
 
 func main() {
-	services.SetupRoutes()
-	services.PopulateRepository()
+	var repo repository.WriteUpRepository = &repository.InMemoryRepository{}
+	services.PopulateRepository(repo)
+	services.SetupRoutes(repo)
 }
