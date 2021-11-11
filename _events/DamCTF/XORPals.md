@@ -1,8 +1,10 @@
 ---
-ctf: DamCTF 2021
-points: 188
-solved: true
+event: DamCTF 2021
+&points: 188
+@solved: true
+date: 8 November, 2021
 title: xorpals
+file_name: XORPals.md
 category: crypto
 difficulty: none
 flag: dam{antman_EXPANDS_inside_tHaNoS_never_sinGLE_cHaR_xOr_yeet}

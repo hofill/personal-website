@@ -1,7 +1,7 @@
 package models
 
 type WriteUp struct {
-	MDData string `json:"md_data"`
+	MDData string `json:"mdData" mapstructure:"md_data"`
 	WriteUpPreview
 }
 
@@ -11,8 +11,9 @@ type WriteUpPreview struct {
 	Event      string `json:"event"`
 	Category   string `json:"category"`
 	Difficulty string `json:"difficulty"`
-	Points     string `json:"points"`
+	FileName   string `json:"fileName" mapstructure:"file_name"`
+	Points     int    `json:"points"`
 	Solved     bool   `json:"solved"`
 	Flag       string `json:"flag"`
-	Status     string `json:"status"`
+	Status     int    `json:"status"`
 }

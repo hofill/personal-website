@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/mitchellh/mapstructure"
 	_ "github.com/mitchellh/mapstructure"
+	"hofill/api_status"
 	"hofill/models"
 	"hofill/utils"
 	"io/ioutil"
@@ -47,7 +48,7 @@ func getEventFolders() []models.Event {
 			event.Title = f.Name()
 		}
 
-		event.Status = "OK"
+		event.Status = api_status.OK
 		events = append(events, event)
 	}
 
