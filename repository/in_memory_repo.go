@@ -59,6 +59,16 @@ func (i *InMemoryRepository) GetWriteUps() []models.WriteUp {
 	return i.writeUps
 }
 
+func (i *InMemoryRepository) GetWriteUp(eventName, writeUpName string) (models.WriteUp, error) {
+	for _, writeUp := range i.writeUps {
+		if writeUp.Event == eventName && writeUp.Title == writeUpName {
+			return writeUp, nil
+		}
+	}
+	item := models.WriteUp{}
+	return item, nil
+}
+
 func (i *InMemoryRepository) GetWriteUpPreviews() []models.WriteUpPreview {
 	var writeUpPreviews []models.WriteUpPreview
 

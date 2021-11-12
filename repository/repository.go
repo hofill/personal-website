@@ -17,6 +17,8 @@ type WriteUpRepository interface {
 
 	GetWriteUps() []models.WriteUp
 
+	GetWriteUp(eventName, writeUpName string) (models.WriteUp, error)
+
 	GetWriteUpPreviews() []models.WriteUpPreview
 
 	GetWriteUpsForEvent(eventName string) []models.WriteUp

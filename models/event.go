@@ -5,5 +5,4 @@ type Event struct {
 	Date   string `json:"date"`
 	Meta   string `json:"meta"`
 	Folder string `json:"folder"`
-	Status int    `json:"status"`
 }

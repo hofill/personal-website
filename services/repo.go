@@ -2,7 +2,6 @@ package services
 
 import (
 	"github.com/mitchellh/mapstructure"
-	"hofill/api_status"
 	"hofill/models"
 	"hofill/repository"
 	"hofill/utils"
@@ -48,7 +47,6 @@ func populateEvents(repo repository.WriteUpRepository) {
 		}
 
 		event.Folder = f.Name()
-		event.Status = api_status.OK
 		repo.AddEvent(event)
 	}
 
