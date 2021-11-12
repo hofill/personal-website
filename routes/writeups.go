@@ -15,7 +15,7 @@ func (w WriteUpHandler) getWriteUpsForEvent(c *gin.Context) {
 	var status = http.StatusNotFound
 	var writeUpPreviews []models.WriteUpPreview
 	if eventName := c.Query("event-name"); eventName != "" {
-		writeUpPreviews := w.repo.GetWriteUpPreviewsForEvent(eventName)
+		writeUpPreviews = w.repo.GetWriteUpPreviewsForEvent(eventName)
 		if len(writeUpPreviews) != 0 {
 			status = http.StatusOK
 		}
